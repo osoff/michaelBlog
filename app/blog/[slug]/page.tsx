@@ -77,38 +77,6 @@ export default async function BlogPostPage({
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold">
-              УправУчет
-            </Link>
-            <nav className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="text-foreground hover:text-primary">
-                Главная
-              </Link>
-              <Link
-                href="/services"
-                className="text-muted-foreground hover:text-primary">
-                Услуги
-              </Link>
-              <Link
-                href="/about"
-                className="text-muted-foreground hover:text-primary">
-                О блоге
-              </Link>
-              <Link
-                href="/contact"
-                className="text-muted-foreground hover:text-primary">
-                Контакты
-              </Link>
-            </nav>
-          </div>
-        </div>
-        nvm
-      </header>
-
       <main className="py-8">
         <div className="container mx-auto px-4 max-w-4xl">
           {/* Back Button */}
@@ -210,89 +178,6 @@ export default async function BlogPostPage({
           )}
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-muted py-12 mt-16">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-8 md:grid-cols-4">
-            <div>
-              <h3 className="font-bold text-lg mb-4">УправУчет</h3>
-              <p className="text-muted-foreground">
-                Современный блог об управленческом учете, финансовой аналитике и
-                инструментах управления.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Категории</h4>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>
-                  <Link href="#" className="hover:text-primary">
-                    Бюджетирование
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-primary">
-                    Анализ затрат
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-primary">
-                    KPI
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-primary">
-                    Отчетность
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Ресурсы</h4>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>
-                  <Link href="#" className="hover:text-primary">
-                    Документация
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-primary">
-                    Примеры моделей
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-primary">
-                    Туториалы
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-primary">
-                    FAQ
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Контакты</h4>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>
-                  <Link href="#" className="hover:text-primary">
-                    Email
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-primary">
-                    LinkedIn
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 УправУчет. Все права защищены.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

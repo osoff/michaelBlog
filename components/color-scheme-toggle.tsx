@@ -15,22 +15,18 @@ import {
 const colorSchemes = [
   {
     name: "neutral",
-    label: "По умолчанию",
     activeColor: "0 0% 45.1%",
   },
   {
     name: "blue",
-    label: "Синий",
     activeColor: "221.2 83.2% 53.3%",
   },
   {
     name: "orange",
-    label: "Оранжевый",
     activeColor: "24.6 95% 53.1%",
   },
   {
     name: "violet",
-    label: "Фиолетовый",
     activeColor: "262.1 83.3% 57.8%",
   },
 ];
@@ -67,25 +63,28 @@ export function ColorSchemeToggle() {
           <span className="sr-only">Выбрать цветовую схему</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[200px]">
-        {colorSchemes.map((scheme) => {
-          const isActive = currentScheme.name === scheme.name;
-          return (
-            <DropdownMenuItem
-              key={scheme.name}
-              className="flex items-center gap-2"
-              onClick={() => handleSchemeChange(scheme.name)}>
-              <div
-                className="h-4 w-4 rounded-full border"
+      <DropdownMenuContent align="end" className="w-[120px]">
+        <div className="grid grid-cols-2 gap-2 p-2">
+          {colorSchemes.map((scheme) => {
+            const isActive = currentScheme.name === scheme.name;
+            return (
+              <button
+                key={scheme.name}
+                className={`relative h-8 w-8 rounded-full border-2 transition-all hover:scale-110 ${
+                  isActive ? "border-foreground" : "border-border"
+                }`}
                 style={{
                   backgroundColor: `hsl(${scheme.activeColor})`,
                 }}
-              />
-              <span className="flex-1">{scheme.label}</span>
-              {isActive && <Check className="h-4 w-4" />}
-            </DropdownMenuItem>
-          );
-        })}
+                onClick={() => handleSchemeChange(scheme.name)}
+                title={scheme.name}>
+                {isActive && (
+                  <Check className="absolute inset-0 m-auto h-4 w-4 text-white drop-shadow-sm" />
+                )}
+              </button>
+            );
+          })}
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -4,6 +4,8 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeWrapper } from "@/components/theme-wrapper";
+import { Navigation } from "@/components/navigation";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "v0 App",
@@ -23,7 +25,101 @@ export default function RootLayout({
       suppressHydrationWarning>
       <body className={GeistSans.className}>
         <ThemeProvider>
-          <ThemeWrapper>{children}</ThemeWrapper>
+          <ThemeWrapper>
+            <Navigation />
+            {children}
+            <footer className="bg-muted py-12 mt-16">
+              <div className="container mx-auto px-4">
+                <div className="grid gap-8 md:grid-cols-4">
+                  <div>
+                    <h3 className="font-bold text-lg mb-4">УправУчет</h3>
+                    <p className="text-muted-foreground">
+                      Современный блог об управленческом учете, финансовой
+                      аналитике и инструментах управления.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-4">Услуги</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li>
+                        <Link href="#" className="hover:text-primary">
+                          Управленческий учет
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#" className="hover:text-primary">
+                          IT аутсорсинг
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#" className="hover:text-primary">
+                          Бюджетирование
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#" className="hover:text-primary">
+                          Автоматизация
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-4">Ресурсы</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li>
+                        <Link href="#" className="hover:text-primary">
+                          Блог
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#" className="hover:text-primary">
+                          Кейсы
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#" className="hover:text-primary">
+                          Шаблоны
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#" className="hover:text-primary">
+                          FAQ
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-4">Контакты</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li>
+                        <Link href="#" className="hover:text-primary">
+                          Email
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#" className="hover:text-primary">
+                          Телефон
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#" className="hover:text-primary">
+                          LinkedIn
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="#" className="hover:text-primary">
+                          Telegram
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="border-t mt-8 pt-8 text-center text-muted-foreground">
+                  <p>&copy; 2024 УправУчет. Все права защищены.</p>
+                </div>
+              </div>
+            </footer>
+          </ThemeWrapper>
         </ThemeProvider>
       </body>
     </html>

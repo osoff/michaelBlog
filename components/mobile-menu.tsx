@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { ColorSchemeToggle } from "@/components/color-scheme-toggle";
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,10 +52,6 @@ export function MobileMenu() {
               <div className="flex items-center justify-between py-2">
                 <span className="text-sm text-muted-foreground">Тема:</span>
                 <ThemeToggle />
-              </div>
-              <div className="flex items-center justify-between py-2">
-                <span className="text-sm text-muted-foreground">Цвета:</span>
-                <ColorSchemeToggle />
               </div>
             </div>
           </nav>
