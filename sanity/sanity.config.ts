@@ -12,6 +12,7 @@ export default defineConfig({
 
   projectId: projectId || "",
   dataset: dataset || "",
+  useCdn: false,
 
   plugins: [deskTool(), visionTool()],
 

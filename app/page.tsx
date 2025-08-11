@@ -211,47 +211,45 @@ export default async function HomePage() {
           ) : (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {posts.map((post) => (
-                <Card
-                  key={post._id}
-                  className="overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="aspect-video relative">
-                    <Image
-                      src={"/placeholder.svg"}
-                      alt={post.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <CardHeader>
-                    <div className="flex items-center justify-between mb-2">
-                      <Badge variant="secondary">{post.category.title}</Badge>
-                      <div className="flex items-center text-sm text-muted-foreground">
-                        <Clock className="w-4 h-4 mr-1" />
-                        {post.readTime} мин
-                      </div>
+                <Link href={`/blog/${post.slug.current}`} key={post._id}>
+                  <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+                    <div className="aspect-video relative">
+                      <Image
+                        src={"/placeholder.svg"}
+                        alt={post.title}
+                        fill
+                        className="object-cover"
+                      />
                     </div>
-                    <CardTitle className="line-clamp-2 hover:text-primary">
-                      <Link href={`/blog/${post.slug.current}`}>
+                    <CardHeader>
+                      <div className="flex items-center justify-between mb-2">
+                        <Badge variant="secondary">{post.category.title}</Badge>
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <Clock className="w-4 h-4 mr-1" />
+                          {post.readTime} мин
+                        </div>
+                      </div>
+                      <CardTitle className="line-clamp-2 hover:text-primary">
                         {post.title}
-                      </Link>
-                    </CardTitle>
-                    <CardDescription className="line-clamp-3">
-                      {post.excerpt}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-between text-sm text-muted-foreground">
-                      <div className="flex items-center">
-                        <User className="w-4 h-4 mr-1" />
-                        {post.author.name}
+                      </CardTitle>
+                      <CardDescription className="line-clamp-3">
+                        {post.excerpt}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex items-center justify-between text-sm text-muted-foreground">
+                        <div className="flex items-center">
+                          <User className="w-4 h-4 mr-1" />
+                          {post.author.name}
+                        </div>
+                        <div className="flex items-center">
+                          <CalendarDays className="w-4 h-4 mr-1" />
+                          {formatDate(post.publishedAt)}
+                        </div>
                       </div>
-                      <div className="flex items-center">
-                        <CalendarDays className="w-4 h-4 mr-1" />
-                        {formatDate(post.publishedAt)}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
           )}
