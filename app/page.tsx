@@ -14,6 +14,8 @@ import Link from "next/link";
 import { client, postsQuery, categoriesQuery, urlFor } from "@/lib/sanity";
 import { Post, Category } from "@/lib/types";
 
+export const revalidate = 0;
+
 async function getPosts(): Promise<Post[]> {
   try {
     const posts = await client.fetch(postsQuery);
