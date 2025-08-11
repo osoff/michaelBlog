@@ -1,29 +1,31 @@
-import { createClient } from '@sanity/client'
-import imageUrlBuilder from '@sanity/image-url'
+import { createClient } from "@sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
 
 // Проверяем наличие переменных окружения
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 
 if (!projectId) {
-  console.warn('NEXT_PUBLIC_SANITY_PROJECT_ID is not set. Using demo project.')
+  console.warn("NEXT_PUBLIC_SANITY_PROJECT_ID is not set. Using demo project.");
 }
 
 if (!dataset) {
-  console.warn('NEXT_PUBLIC_SANITY_DATASET is not set. Using production dataset.')
+  console.warn(
+    "NEXT_PUBLIC_SANITY_DATASET is not set. Using production dataset."
+  );
 }
 
 export const client = createClient({
-  projectId: projectId || 'demo-project-id',
-  dataset: dataset || 'production',
-  useCdn: process.env.NODE_ENV === 'production',
-  apiVersion: '2024-01-01',
-})
+  projectId: projectId || "demo-project-id",
+  dataset: dataset || "production",
+  useCdn: process.env.NODE_ENV === "production",
+  apiVersion: "2024-01-01",
+});
 
-const builder = imageUrlBuilder(client)
+const builder = imageUrlBuilder(client);
 
 export function urlFor(source: any) {
-  return builder.image(source)
+  return builder.image(source);
 }
 
 // GROQ queries
@@ -34,6 +36,7 @@ export const postsQuery = `
     slug,
     excerpt,
     mainImage,
+    previewImage,
     publishedAt,
     readTime,
     featured,
@@ -49,7 +52,7 @@ export const postsQuery = `
       role
     }
   }
-`
+`;
 
 export const postQuery = `
   *[_type == "post" && slug.current == $slug][0] {
@@ -58,6 +61,7 @@ export const postQuery = `
     slug,
     excerpt,
     mainImage,
+    previewImage,
     publishedAt,
     readTime,
     content,
@@ -77,7 +81,7 @@ export const postQuery = `
     },
     seo
   }
-`
+`;
 
 export const categoriesQuery = `
   *[_type == "category"] | order(title asc) {
@@ -87,7 +91,7 @@ export const categoriesQuery = `
     description,
     color
   }
-`
+`;
 
 export const relatedPostsQuery = `
   *[_type == "post" && category._ref == $categoryId && slug.current != $currentSlug] | order(publishedAt desc) [0...3] {
@@ -95,10 +99,11 @@ export const relatedPostsQuery = `
     title,
     slug,
     mainImage,
+    previewImage,
     category->{
       title,
       slug,
       color
     }
   }
-`
+`;

@@ -20,8 +20,7 @@ async function getPosts(): Promise<Post[]> {
     return posts || [];
   } catch (error) {
     console.error("Error fetching posts:", error);
-    // Возвращаем демо-данные если Sanity не настроен
-    return getDemoPosts();
+    throw new Error("Error fetching posts");
   }
 }
 
@@ -31,81 +30,8 @@ async function getCategories(): Promise<Category[]> {
     return categories || [];
   } catch (error) {
     console.error("Error fetching categories:", error);
-    // Возвращаем демо-категории если Sanity не настроен
-    return getDemoCategories();
+    throw new Error("Error fetching categories");
   }
-}
-
-// Демо-данные для разработки
-function getDemoPosts(): Post[] {
-  return [
-    {
-      _id: "demo-1",
-      title: "Бюджетирование в условиях неопределенности: практические подходы",
-      slug: { current: "budgeting-uncertainty-methods" },
-      excerpt:
-        "Рассматриваем современные методы составления бюджетов и прогнозирования в условиях экономической нестабильности.",
-      mainImage: null,
-      publishedAt: "2024-12-15T10:00:00Z",
-      readTime: 7,
-      featured: true,
-      category: {
-        title: "Бюджетирование",
-        slug: { current: "budgeting" },
-        color: "blue",
-      },
-      author: {
-        name: "Елена Финансова",
-        slug: { current: "elena-finansova" },
-        role: "CFO",
-      },
-    },
-    {
-      _id: "demo-2",
-      title: "ABC-анализ: пошаговое руководство по внедрению",
-      slug: { current: "abc-analysis-implementation" },
-      excerpt:
-        "Подробное руководство по внедрению ABC-анализа для оптимизации затрат и повышения эффективности бизнеса.",
-      mainImage: null,
-      publishedAt: "2024-12-12T10:00:00Z",
-      readTime: 9,
-      category: {
-        title: "Анализ затрат",
-        slug: { current: "cost-analysis" },
-        color: "green",
-      },
-      author: {
-        name: "Михаил Аналитиков",
-        slug: { current: "mikhail-analitikov" },
-        role: "Финансовый аналитик",
-      },
-    },
-  ];
-}
-
-function getDemoCategories(): Category[] {
-  return [
-    {
-      title: "Бюджетирование",
-      slug: { current: "budgeting" },
-      color: "blue",
-    },
-    {
-      title: "Анализ затрат",
-      slug: { current: "cost-analysis" },
-      color: "green",
-    },
-    {
-      title: "KPI",
-      slug: { current: "kpi" },
-      color: "purple",
-    },
-    {
-      title: "Отчетность",
-      slug: { current: "reporting" },
-      color: "red",
-    },
-  ];
 }
 
 function formatDate(dateString: string): string {
@@ -121,6 +47,7 @@ export const revalidate = 0;
 
 export default async function HomePage() {
   const [posts, categories] = await Promise.all([getPosts(), getCategories()]);
+  console.log(posts);
 
   const isSanityConfigured =
     process.env.NEXT_PUBLIC_SANITY_PROJECT_ID &&
@@ -217,7 +144,11 @@ export default async function HomePage() {
                   <Card className="overflow-hidden hover:shadow-lg transition-shadow">
                     <div className="aspect-video relative">
                       <Image
-                        src={"/placeholder.svg"}
+                        src={
+                          post.previewImage
+                            ? urlFor(post.previewImage).url()
+                            : "/placeholder.svg"
+                        }
                         alt={post.title}
                         fill
                         className="object-cover"
