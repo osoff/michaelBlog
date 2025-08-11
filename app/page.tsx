@@ -14,8 +14,6 @@ import Link from "next/link";
 import { client, postsQuery, categoriesQuery, urlFor } from "@/lib/sanity";
 import { Post, Category } from "@/lib/types";
 
-export const revalidate = 0;
-
 async function getPosts(): Promise<Post[]> {
   try {
     const posts = await client.fetch(postsQuery);
@@ -118,6 +116,8 @@ function formatDate(dateString: string): string {
     day: "numeric",
   });
 }
+
+export const revalidate = 0;
 
 export default async function HomePage() {
   const [posts, categories] = await Promise.all([getPosts(), getCategories()]);

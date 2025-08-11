@@ -13,6 +13,7 @@ export default defineConfig({
   projectId: projectId || "",
   dataset: dataset || "",
   useCdn: false,
+  apiVersion: "2024-12-01",
 
   plugins: [deskTool(), visionTool()],
 
