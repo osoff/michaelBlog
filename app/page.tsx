@@ -13,6 +13,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { client, postsQuery, categoriesQuery, urlFor } from "@/lib/sanity";
 import { Post, Category } from "@/lib/types";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { MobileMenu } from "@/components/mobile-menu";
+import { ColorSchemeToggle } from "@/components/color-scheme-toggle";
 
 async function getPosts(): Promise<Post[]> {
   try {
@@ -158,6 +161,11 @@ export default async function HomePage() {
                 Контакты
               </Link>
             </nav>
+            <div className="flex items-center space-x-4">
+              <ColorSchemeToggle />
+              <ThemeToggle />
+              <MobileMenu />
+            </div>
           </div>
         </div>
       </header>
