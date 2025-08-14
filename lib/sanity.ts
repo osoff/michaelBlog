@@ -107,3 +107,19 @@ export const relatedPostsQuery = `
     }
   }
 `;
+
+export const servicesQuery = `
+  *[_type == "service"] | order(order asc, title asc) {
+    _id,
+    title,
+    slug,
+    description,
+    mainImage,
+    features,
+    duration,
+    price,
+    icon,
+    popular,
+    order
+  }
+`;

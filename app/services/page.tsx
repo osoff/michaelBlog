@@ -19,117 +19,9 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
-const services = [
-  {
-    id: 1,
-    title: "Построение управленческого учета",
-    description:
-      "Комплексное внедрение системы управленческого учета с нуля или модернизация существующей системы",
-    features: [
-      "Анализ текущего состояния учета",
-      "Разработка учетной политики",
-      "Настройка центров ответственности",
-      "Создание управленческих отчетов",
-      "Обучение персонала",
-    ],
-    duration: "3-6 месяцев",
-    price: "от 500 000 ₽",
-    icon: <BarChart3 className="w-8 h-8" />,
-    image: "/management-accounting-setup.png",
-    popular: true,
-  },
-  {
-    id: 2,
-    title: "IT аутсорсинг",
-    description:
-      "Полное техническое сопровождение IT-инфраструктуры и автоматизация бизнес-процессов",
-    features: [
-      "Техническая поддержка 24/7",
-      "Администрирование серверов",
-      "Настройка и поддержка 1С",
-      "Интеграция систем учета",
-      "Резервное копирование данных",
-    ],
-    duration: "Постоянно",
-    price: "от 50 000 ₽/мес",
-    icon: <Settings className="w-8 h-8" />,
-    image: "/it-outsourcing-services.png",
-    popular: false,
-  },
-  {
-    id: 3,
-    title: "Консультации по бюджетированию",
-    description:
-      "Разработка и внедрение системы бюджетного планирования и контроля",
-    features: [
-      "Методология бюджетирования",
-      "Модели финансового планирования",
-      "Автоматизация процессов",
-      "KPI и система мотивации",
-      "Регламенты и процедуры",
-    ],
-    duration: "2-4 месяца",
-    price: "от 300 000 ₽",
-    icon: <Zap className="w-8 h-8" />,
-    image: "/budgeting-consulting.png",
-    popular: false,
-  },
-  {
-    id: 4,
-    title: "Внедрение KPI систем",
-    description:
-      "Разработка и внедрение системы ключевых показателей эффективности",
-    features: [
-      "Анализ бизнес-процессов",
-      "Разработка системы KPI",
-      "Настройка дашбордов",
-      "Система мотивации персонала",
-      "Мониторинг и корректировка",
-    ],
-    duration: "1-3 месяца",
-    price: "от 200 000 ₽",
-    icon: <CheckCircle className="w-8 h-8" />,
-    image: "/kpi-implementation.png",
-    popular: false,
-  },
-  {
-    id: 5,
-    title: "Автоматизация отчетности",
-    description:
-      "Внедрение BI-систем и автоматизация управленческой отчетности",
-    features: [
-      "Анализ потребностей в отчетах",
-      "Настройка Power BI / Tableau",
-      "Интеграция источников данных",
-      "Создание интерактивных дашбордов",
-      "Обучение пользователей",
-    ],
-    duration: "2-4 месяца",
-    price: "от 400 000 ₽",
-    icon: <BarChart3 className="w-8 h-8" />,
-    image: "/reporting-automation.png",
-    popular: true,
-  },
-  {
-    id: 6,
-    title: "Обучение персонала",
-    description:
-      "Корпоративное обучение по управленческому учету и финансовой аналитике",
-    features: [
-      "Индивидуальные программы",
-      "Практические кейсы",
-      "Онлайн и офлайн форматы",
-      "Сертификация участников",
-      "Методические материалы",
-    ],
-    duration: "1-2 месяца",
-    price: "от 100 000 ₽",
-    icon: <GraduationCap className="w-8 h-8" />,
-    image: "/staff-training.png",
-    popular: false,
-  },
-];
+import { getServices } from "@/services/services";
+import { ServiceIcon } from "@/components/service-icon";
+import { urlFor } from "@/lib/sanity";
 
 const advantages = [
   {
@@ -154,7 +46,9 @@ const advantages = [
   },
 ];
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const services = await getServices();
+
   return (
     <div className="min-h-screen bg-background">
       <main className="py-12">
@@ -174,7 +68,7 @@ export default function ServicesPage() {
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {services.map((service) => (
                 <Card
-                  key={service.id}
+                  key={service._id}
                   className={`relative overflow-hidden hover:shadow-lg transition-shadow ${service.popular ? "ring-2 ring-primary" : ""}`}>
                   {service.popular && (
                     <div className="absolute top-4 right-4">
@@ -186,7 +80,12 @@ export default function ServicesPage() {
 
                   <div className="aspect-video relative">
                     <Image
-                      src={service.image || "/placeholder.svg"}
+                      src={
+                        urlFor(service.mainImage)
+                          .width(400)
+                          .height(300)
+                          .url() || "/placeholder.svg"
+                      }
                       alt={service.title}
                       fill
                       className="object-cover"
@@ -195,7 +94,9 @@ export default function ServicesPage() {
 
                   <CardHeader>
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="text-primary">{service.icon}</div>
+                      <div className="text-primary">
+                        <ServiceIcon icon={service.icon} />
+                      </div>
                       <CardTitle className="text-lg">{service.title}</CardTitle>
                     </div>
                     <CardDescription className="text-sm">

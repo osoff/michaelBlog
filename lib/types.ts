@@ -45,3 +45,23 @@ export interface Category {
   description?: string;
   color?: string;
 }
+
+export interface Service {
+  _id: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+  description: string;
+  mainImage: any;
+  features: string[];
+  duration: string;
+  price: string;
+  icon: string;
+  popular: boolean;
+  order: number;
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+  };
+}
