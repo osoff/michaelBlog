@@ -14,49 +14,51 @@ export function Navigation() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-6">
             <Link href="/" className="font-bold text-xl">
-              УправУчет
+              INOVEX
             </Link>
-            <nav className="hidden md:flex space-x-6">
-              <Link
-                href="/"
-                className={`transition-colors ${
-                  pathname === "/"
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-primary"
-                }`}>
-                Главная
-              </Link>
-              <Link
-                href="/services"
-                className={`transition-colors ${
-                  pathname === "/services"
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-primary"
-                }`}>
-                Услуги
-              </Link>
-              <Link
-                href="/about"
-                className={`transition-colors ${
-                  pathname === "/about"
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-primary"
-                }`}>
-                О блоге
-              </Link>
-              <Link
-                href="/contact"
-                className={`transition-colors ${
-                  pathname === "/contact"
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-primary"
-                }`}>
-                Контакты
-              </Link>
-            </nav>
           </div>
+          <nav className="hidden md:flex space-x-6">
+            <Link
+              href="/"
+              className={`transition-colors ${
+                pathname === "/"
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-primary"
+              }`}>
+              Главная
+            </Link>
+            <Link
+              href="/services"
+              className={`transition-colors ${
+                pathname === "/services"
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-primary"
+              }`}>
+              Услуги
+            </Link>
+            <Link
+              href="/about"
+              className={`transition-colors ${
+                pathname === "/about"
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-primary"
+              }`}>
+              О блоге
+            </Link>
+            <Link
+              href="/contact"
+              className={`transition-colors ${
+                pathname === "/contact"
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-primary"
+              }`}>
+              Контакты
+            </Link>
+          </nav>
           <div className="flex items-center space-x-4">
-            <ThemeToggle />
+            <div className="hidden md:block">
+              <ThemeToggle />
+            </div>
             <MobileMenu />
           </div>
         </div>

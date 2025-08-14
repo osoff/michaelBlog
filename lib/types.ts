@@ -11,7 +11,7 @@ export interface Post {
   readTime: number;
   featured?: boolean;
   content?: any[];
-  category: Category;
+  categories: Category[];
   author: Author;
   seo?: {
     metaTitle?: string;

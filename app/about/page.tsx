@@ -6,9 +6,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { getPosts } from "@/services/posts";
 import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { getArticleWord } from "../../helpers/index";
 
 const teamMembers = [
   {
@@ -49,7 +51,9 @@ const teamMembers = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const posts = await Promise.resolve(getPosts());
+
   return (
     <div className="min-h-screen bg-background">
       <main className="py-12">
@@ -57,12 +61,13 @@ export default function AboutPage() {
           {/* Hero Section */}
           <section className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              О нашем блоге
+              Innovation and Excellence
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              УправУчет — это место, где финансовые директора, контролеры и
-              аналитики делятся знаниями и лучшими практиками в области
-              управленческого учета.
+              Инновационное совершенство (Innovation Excellence) – это
+              комплексный подход, направленный на повышение способности
+              организации к инновациям. Верим - Предусмотрительность рождает
+              лучший сервис!
             </p>
           </section>
 
@@ -99,31 +104,37 @@ export default function AboutPage() {
               <Card>
                 <CardContent className="p-6">
                   <div className="text-3xl font-bold text-primary mb-2">
+                    {posts.length}
+                  </div>
+                  <div className="text-muted-foreground">
+                    {getArticleWord(posts.length)}
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="p-6">
+                  <div className="text-3xl font-bold text-primary mb-2">
                     150+
                   </div>
-                  <div className="text-muted-foreground">Статей</div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="text-3xl font-bold text-primary mb-2">
-                    50K+
+                  <div className="text-muted-foreground">
+                    Реализованных кейсов
                   </div>
-                  <div className="text-muted-foreground">Читателей</div>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="p-6">
-                  <div className="text-3xl font-bold text-primary mb-2">
-                    25+
+                  <div className="text-3xl font-bold text-primary mb-2">∞</div>
+                  <div className="text-muted-foreground">
+                    Уникальных методик
                   </div>
-                  <div className="text-muted-foreground">Авторов</div>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="p-6">
-                  <div className="text-3xl font-bold text-primary mb-2">3</div>
-                  <div className="text-muted-foreground">Года</div>
+                  <div className="text-3xl font-bold text-primary mb-2">5</div>
+                  <div className="text-muted-foreground">
+                    Лет реального опыта
+                  </div>
                 </CardContent>
               </Card>
             </div>

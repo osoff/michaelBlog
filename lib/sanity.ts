@@ -40,7 +40,7 @@ export const postsQuery = `
     publishedAt,
     readTime,
     featured,
-    category->{
+    categories[]->{
       title,
       slug,
       color
@@ -65,7 +65,7 @@ export const postQuery = `
     publishedAt,
     readTime,
     content,
-    category->{
+    categories[]->{
       title,
       slug,
       color
@@ -94,13 +94,13 @@ export const categoriesQuery = `
 `;
 
 export const relatedPostsQuery = `
-  *[_type == "post" && category._ref == $categoryId && slug.current != $currentSlug] | order(publishedAt desc) [0...3] {
+  *[_type == "post" && references($categoryId) in categories[]._ref && slug.current != $currentSlug] | order(publishedAt desc) [0...3] {
     _id,
     title,
     slug,
     mainImage,
     previewImage,
-    category->{
+    categories[]->{
       title,
       slug,
       color

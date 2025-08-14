@@ -11,43 +11,15 @@ import { Input } from "@/components/ui/input";
 import { CalendarDays, Clock, Search, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { client, postsQuery, categoriesQuery, urlFor } from "@/lib/sanity";
-import { Post, Category } from "@/lib/types";
-
-async function getPosts(): Promise<Post[]> {
-  try {
-    const posts = await client.fetch(postsQuery);
-    return posts || [];
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    throw new Error("Error fetching posts");
-  }
-}
-
-async function getCategories(): Promise<Category[]> {
-  try {
-    const categories = await client.fetch(categoriesQuery);
-    return categories || [];
-  } catch (error) {
-    console.error("Error fetching categories:", error);
-    throw new Error("Error fetching categories");
-  }
-}
-
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("ru-RU", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
+import { urlFor } from "@/lib/sanity";
+import { getPosts } from "@/services/posts";
+import { getCategories } from "@/services/categories";
+import { formatDate } from "@/helpers";
 
 export const revalidate = 0;
 
 export default async function HomePage() {
   const [posts, categories] = await Promise.all([getPosts(), getCategories()]);
-  console.log(posts);
 
   const isSanityConfigured =
     process.env.NEXT_PUBLIC_SANITY_PROJECT_ID &&
@@ -63,12 +35,12 @@ export default async function HomePage() {
       {/* Hero Section */}
       <section className="py-12 md:py-20 bg-gradient-to-r from-primary/10 to-secondary/10">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Современный блог об управленческом учете
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 uppercase">
+            Современные IT решения для Вашего бизнеса
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Изучайте методы управленческого учета, финансовую аналитику и
-            инструменты для принятия управленческих решений
+            Знакомим Вас с актуальными решениями для управления собственным
+            бизнесом и достижением максимального результата
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
             <div className="relative flex-1">
@@ -155,9 +127,22 @@ export default async function HomePage() {
                       />
                     </div>
                     <CardHeader>
-                      <div className="flex items-center justify-between mb-2">
-                        <Badge variant="secondary">{post.category.title}</Badge>
-                        <div className="flex items-center text-sm text-muted-foreground">
+                      <div className="flex items-start justify-between mb-2">
+                        <div className="flex flex-wrap gap-1">
+                          {post.categories?.map((category) => (
+                            <Badge
+                              key={category._id}
+                              variant="secondary"
+                              className={
+                                category.color
+                                  ? `bg-${category.color}-100 text-${category.color}-800 dark:bg-${category.color}-900 dark:text-${category.color}-200`
+                                  : ""
+                              }>
+                              {category.title}
+                            </Badge>
+                          ))}
+                        </div>
+                        <div className="flex items-center text-sm text-muted-foreground shrink-0">
                           <Clock className="w-4 h-4 mr-1" />
                           {post.readTime} мин
                         </div>

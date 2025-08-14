@@ -6,6 +6,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeWrapper } from "@/components/theme-wrapper";
 import { Navigation } from "@/components/navigation";
 import Link from "next/link";
+import { Mail, Phone, Linkedin } from "lucide-react";
+import { FaTelegram } from "react-icons/fa6";
 
 export const metadata: Metadata = {
   title: "v0 App",
@@ -32,7 +34,7 @@ export default function RootLayout({
               <div className="container mx-auto px-4">
                 <div className="grid gap-8 md:grid-cols-4">
                   <div>
-                    <h3 className="font-bold text-lg mb-4">УправУчет</h3>
+                    <h3 className="font-bold text-lg mb-4">INOVEX</h3>
                     <p className="text-muted-foreground">
                       Современный блог об управленческом учете, финансовой
                       аналитике и инструментах управления.
@@ -93,29 +95,29 @@ export default function RootLayout({
                     <ul className="space-y-2 text-muted-foreground">
                       <li>
                         <Link href="#" className="hover:text-primary">
-                          Email
+                          <Mail />
                         </Link>
                       </li>
                       <li>
                         <Link href="#" className="hover:text-primary">
-                          Телефон
+                          <Phone />
                         </Link>
                       </li>
                       <li>
                         <Link href="#" className="hover:text-primary">
-                          LinkedIn
+                          <Linkedin />
                         </Link>
                       </li>
                       <li>
                         <Link href="#" className="hover:text-primary">
-                          Telegram
+                          <FaTelegram className="h-6 w-6" />
                         </Link>
                       </li>
                     </ul>
                   </div>
                 </div>
                 <div className="border-t mt-8 pt-8 text-center text-muted-foreground">
-                  <p>&copy; 2024 УправУчет. Все права защищены.</p>
+                  <p>&copy; 2024 INOVEX. Все права защищены.</p>
                 </div>
               </div>
             </footer>

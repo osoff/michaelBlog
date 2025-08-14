@@ -8,7 +8,7 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 
 export default defineConfig({
   name: "upravuchet-blog",
-  title: "УправУчет Blog",
+  title: "INOVEX Blog",
 
   projectId: projectId || "",
   dataset: dataset || "",

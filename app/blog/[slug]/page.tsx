@@ -20,11 +20,30 @@ async function getPost(slug: string): Promise<Post | null> {
 }
 
 async function getRelatedPosts(
-  categoryId: string,
+  categoryIds: string[],
   currentSlug: string
 ): Promise<Post[]> {
   try {
-    return await client.fetch(relatedPostsQuery, { categoryId, currentSlug });
+    // Получаем посты, которые имеют хотя бы одну из категорий текущего поста
+    const relatedPosts = await client.fetch(
+      `
+      *[_type == "post" && slug.current != $currentSlug && count(categories[]._ref in $categoryIds) > 0] | order(publishedAt desc) [0...3] {
+        _id,
+        title,
+        slug,
+        mainImage,
+        previewImage,
+        categories[]->{
+          title,
+          slug,
+          color
+        }
+      }
+    `,
+      { categoryIds, currentSlug }
+    );
+
+    return relatedPosts || [];
   } catch (error) {
     console.error("Error fetching related posts:", error);
     return [];
@@ -73,7 +92,7 @@ export default async function BlogPostPage({
   }
 
   const relatedPosts = await getRelatedPosts(
-    post.category._id!,
+    post.categories?.map((cat) => cat._id!) || [],
     post.slug.current
   );
 
@@ -92,7 +111,19 @@ export default async function BlogPostPage({
           {/* Article Header */}
           <article className="prose prose-gray dark:prose-invert max-w-none">
             <div className="mb-8">
-              <Badge className="mb-4">{post.category.title}</Badge>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {post.categories?.map((category) => (
+                  <Badge
+                    key={category._id}
+                    className={
+                      category.color
+                        ? `bg-${category.color}-100 text-${category.color}-800 dark:${category.color}-900 dark:text-${category.color}-200`
+                        : ""
+                    }>
+                    {category.title}
+                  </Badge>
+                ))}
+              </div>
               <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
                 {post.title}
               </h1>
@@ -112,14 +143,10 @@ export default async function BlogPostPage({
                     {formatDate(post.publishedAt)}
                   </div>
                   <div className="flex items-center text-sm text-muted-foreground">
-                    <Clock className="w-4 h-4 mr-1" />
-                    {post.readTime} мин
+                    {/* <Clock className="w-4 h-4 mr-1" /> */}
+                    Время чтения - {post.readTime} мин
                   </div>
                 </div>
-                <Button variant="outline" size="sm">
-                  <Share2 className="w-4 h-4 mr-2" />
-                  Поделиться
-                </Button>
               </div>
             </div>
 

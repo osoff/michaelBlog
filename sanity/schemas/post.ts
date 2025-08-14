@@ -46,11 +46,16 @@ export const post = defineType({
       },
     }),
     defineField({
-      name: "category",
-      title: "Категория",
-      type: "reference",
-      to: { type: "category" },
-      validation: (Rule) => Rule.required(),
+      name: "categories",
+      title: "Категории",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: { type: "category" },
+        },
+      ],
+      validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
       name: "author",
