@@ -6,6 +6,8 @@ import { Post } from "@/lib/types";
 interface PostsContextType {
   filteredPosts: Post[];
   setFilteredPosts: (posts: Post[]) => void;
+  isLoading: boolean;
+  setIsLoading: (loading: boolean) => void;
 }
 
 const PostsContext = createContext<PostsContextType | undefined>(undefined);
@@ -18,9 +20,11 @@ export function PostsProvider({
   initialPosts: Post[];
 }) {
   const [filteredPosts, setFilteredPosts] = useState<Post[]>(initialPosts);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <PostsContext.Provider value={{ filteredPosts, setFilteredPosts }}>
+    <PostsContext.Provider
+      value={{ filteredPosts, setFilteredPosts, isLoading, setIsLoading }}>
       {children}
     </PostsContext.Provider>
   );

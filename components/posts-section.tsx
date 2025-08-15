@@ -24,7 +24,7 @@ interface PostsSectionProps {
 }
 
 export function PostsSection({ posts: initialPosts }: PostsSectionProps) {
-  const { filteredPosts } = usePosts();
+  const { filteredPosts, isLoading } = usePosts();
   const { currentParams } = useUrlParams();
 
   const POSTS_PER_PAGE = 9;
@@ -36,7 +36,14 @@ export function PostsSection({ posts: initialPosts }: PostsSectionProps) {
   return (
     <main id="posts" className="py-12">
       <div className="container mx-auto px-4">
-        {paginatedPosts.length === 0 ? (
+        {isLoading ? (
+          <div className="text-center py-12">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+              <span className="text-lg">Загрузка статей...</span>
+            </div>
+          </div>
+        ) : paginatedPosts.length === 0 ? (
           <div className="text-center py-12">
             <h2 className="text-2xl font-bold mb-4">Статьи не найдены</h2>
             <p className="text-muted-foreground mb-6">

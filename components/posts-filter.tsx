@@ -38,14 +38,7 @@ export function PostsFilter({ posts, categories }: PostsFilterProps) {
 
   // Выполняем поиск при изменении фильтров
   useEffect(() => {
-    // Избегаем лишних запросов при инициализации
-    if (
-      debouncedSearch === currentParams.search &&
-      currentParams.category === "all" &&
-      debouncedSearch === ""
-    ) {
-      return;
-    }
+    // Всегда выполняем поиск при изменении фильтров
     searchPosts(debouncedSearch, currentParams.category);
   }, [debouncedSearch, currentParams.category, searchPosts]);
 
@@ -53,6 +46,12 @@ export function PostsFilter({ posts, categories }: PostsFilterProps) {
   useEffect(() => {
     setFilteredPosts(searchResults);
   }, [searchResults, setFilteredPosts]);
+
+  // Синхронизируем состояние загрузки с контекстом
+  const { setIsLoading } = usePosts();
+  useEffect(() => {
+    setIsLoading(isLoading);
+  }, [isLoading, setIsLoading]);
 
   // Обновляем URL при изменении debounced поиска
   useEffect(() => {
@@ -100,6 +99,8 @@ export function PostsFilter({ posts, categories }: PostsFilterProps) {
             }
             className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => {
+              if (category.slug.current === currentParams.category) return; // Не делаем ничего если категория уже активна
+
               if (category.slug.current === "all") {
                 // При нажатии на "Все" сбрасываем только фильтр категории
                 updateParams({ category: "all" });
@@ -119,7 +120,7 @@ export function PostsFilter({ posts, categories }: PostsFilterProps) {
           {isLoading ? (
             <div className="flex items-center justify-center gap-2">
               <Loader2 className="w-4 h-4 animate-spin" />
-              Поиск...
+              Загрузка...
             </div>
           ) : (
             `Найдено ${searchResults.length} из ${posts.length} статей`
