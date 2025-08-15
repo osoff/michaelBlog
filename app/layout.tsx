@@ -7,7 +7,7 @@ import { ThemeWrapper } from "@/components/theme-wrapper";
 import { Navigation } from "@/components/navigation";
 import Link from "next/link";
 import { Mail, Phone, Linkedin } from "lucide-react";
-import { FaTelegram } from "react-icons/fa6";
+import { FaTelegram, FaWhatsapp } from "react-icons/fa6";
 
 export const metadata: Metadata = {
   title: "v0 App",
@@ -35,10 +35,6 @@ export default function RootLayout({
                 <div className="grid gap-8 md:grid-cols-4">
                   <div>
                     <h3 className="font-bold text-lg mb-4">INOVEX</h3>
-                    <p className="text-muted-foreground">
-                      Современный блог об управленческом учете, финансовой
-                      аналитике и инструментах управления.
-                    </p>
                   </div>
                   <div>
                     <h4 className="font-semibold mb-4">Услуги</h4>
@@ -94,24 +90,44 @@ export default function RootLayout({
                     <h4 className="font-semibold mb-4">Контакты</h4>
                     <ul className="space-y-2 text-muted-foreground">
                       <li>
-                        <Link href="#" className="hover:text-primary">
+                        <a
+                          target="_blank"
+                          href="mailto:mb@1tvb.ru"
+                          className="hover:text-primary">
                           <Mail />
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link href="#" className="hover:text-primary">
+                        <a
+                          target="_blank"
+                          href="tel:+79123328609"
+                          className="hover:text-primary">
                           <Phone />
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link href="#" className="hover:text-primary">
+                        <a
+                          target="_blank"
+                          href="#"
+                          className="hover:text-primary">
                           <Linkedin />
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link href="#" className="hover:text-primary">
+                        <a
+                          target="_blank"
+                          href="https://t.me/mb_tvb"
+                          className="hover:text-primary">
                           <FaTelegram className="h-6 w-6" />
-                        </Link>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          target="_blank"
+                          href="https://api.whatsapp.com/send/?phone=%2B79123328609&text&type=phone_number&app_absent=0"
+                          className="hover:text-primary">
+                          <FaWhatsapp className="h-6 w-6" />
+                        </a>
                       </li>
                     </ul>
                   </div>

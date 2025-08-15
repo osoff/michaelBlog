@@ -1,15 +1,38 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MobileMenu } from "@/components/mobile-menu";
 
 export function Navigation() {
   const pathname = usePathname();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const handleStart = () => setIsLoading(true);
+    const handleComplete = () => setIsLoading(false);
+
+    // Отслеживаем начало и завершение навигации
+    window.addEventListener("beforeunload", handleStart);
+    window.addEventListener("load", handleComplete);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleStart);
+      window.removeEventListener("load", handleComplete);
+    };
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      {/* Loading Bar */}
+      {isLoading && (
+        <div className="absolute top-0 left-0 right-0 h-1 bg-primary">
+          <div className="h-full bg-primary animate-pulse"></div>
+        </div>
+      )}
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-6">
