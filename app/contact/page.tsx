@@ -6,11 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone } from "lucide-react";
-import Link from "next/link";
+import { ContactForm } from "@/components/contact-form";
 
 export default function ContactPage() {
   return (
@@ -31,43 +28,7 @@ export default function ContactPage() {
 
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Contact Form */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Отправить сообщение</CardTitle>
-                <CardDescription>
-                  Заполните форму ниже, и мы свяжемся с вами в ближайшее время.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">Имя</Label>
-                    <Input id="firstName" placeholder="Ваше имя" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Фамилия</Label>
-                    <Input id="lastName" placeholder="Ваша фамилия" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="your@email.com" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Тема</Label>
-                  <Input id="subject" placeholder="Тема сообщения" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message">Сообщение</Label>
-                  <Textarea
-                    id="message"
-                    placeholder="Расскажите нам подробнее..."
-                    className="min-h-[120px]"
-                  />
-                </div>
-                <Button className="w-full">Отправить сообщение</Button>
-              </CardContent>
-            </Card>
+            <ContactForm />
 
             {/* Contact Info */}
             <div className="space-y-6">
