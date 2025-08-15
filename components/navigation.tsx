@@ -28,6 +28,15 @@ export function Navigation() {
               Главная
             </Link>
             <Link
+              href="/articles"
+              className={`transition-colors ${
+                pathname === "/articles"
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-primary"
+              }`}>
+              Статьи
+            </Link>
+            <Link
               href="/services"
               className={`transition-colors ${
                 pathname === "/services"

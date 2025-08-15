@@ -115,20 +115,6 @@ export function PostsFilter({ posts, categories }: PostsFilterProps) {
                 </Badge>
               ))}
             </div>
-
-            {/* Информация о результатах */}
-            {hasActiveFilters && (
-              <div className="text-center text-sm text-muted-foreground">
-                {isLoading ? (
-                  <div className="flex items-center justify-center gap-2">
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Загрузка...
-                  </div>
-                ) : (
-                  `Найдено ${searchResults.length} из ${posts.length} статей`
-                )}
-              </div>
-            )}
           </div>
         </div>
       </section>

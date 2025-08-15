@@ -119,23 +119,27 @@ export default async function ServicesPage() {
                       </ul>
                     </div>
 
-                    <div className="flex justify-between items-center text-sm">
-                      <div>
-                        <span className="text-muted-foreground">Срок: </span>
-                        <span className="font-medium">{service.duration}</span>
-                      </div>
-                      <div className="text-right">
-                        <div className="font-bold text-lg text-primary">
-                          {service.price}
+                    <div className="flex flex-col">
+                      <div className="flex justify-between items-center text-sm">
+                        <div>
+                          <span className="text-muted-foreground">Срок: </span>
+                          <span className="font-medium">
+                            {service.duration}
+                          </span>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-bold text-lg text-primary">
+                            {service.price}
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="flex gap-2">
-                      <Button className="flex-1">Заказать</Button>
-                      <Button variant="outline" size="sm">
-                        Подробнее
-                      </Button>
+                      <div className="flex gap-2">
+                        <Button className="flex-1">Заказать</Button>
+                        <Button variant="outline" size="sm">
+                          Подробнее
+                        </Button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>

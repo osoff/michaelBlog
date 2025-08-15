@@ -32,6 +32,12 @@ export function MobileMenu() {
                 Главная
               </Link>
               <Link
+                href="/articles"
+                className="text-muted-foreground hover:text-primary py-2"
+                onClick={toggleMenu}>
+                Статьи
+              </Link>
+              <Link
                 href="/services"
                 className="text-muted-foreground hover:text-primary py-2"
                 onClick={toggleMenu}>
