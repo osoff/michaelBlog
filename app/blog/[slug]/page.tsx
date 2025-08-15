@@ -151,17 +151,19 @@ export default async function BlogPostPage({
             </div>
 
             {/* Featured Image */}
-            <div className="aspect-video relative mb-8 rounded-lg overflow-hidden">
-              <Image
-                src={
-                  urlFor(post.mainImage).width(1200).height(600).url() ||
-                  "/placeholder.svg"
-                }
-                alt={post.title}
-                fill
-                className="object-cover"
-              />
-            </div>
+            {post.mainImage && (
+              <div className="aspect-video relative mb-8 rounded-lg overflow-hidden">
+                <Image
+                  src={
+                    urlFor(post.mainImage).width(1200).height(600).url() ||
+                    "/placeholder.svg"
+                  }
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
 
             {/* Article Content */}
             <div className="prose prose-lg max-w-none">

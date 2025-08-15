@@ -53,7 +53,7 @@ export function PostsSection({
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {paginatedPosts.map((post) => (
                 <Link href={`/blog/${post.slug.current}`} key={post._id}>
-                  <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+                  <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full flex flex-col">
                     <div className="aspect-video relative">
                       <Image
                         src={
@@ -66,7 +66,7 @@ export function PostsSection({
                         className="object-cover"
                       />
                     </div>
-                    <CardHeader>
+                    <CardHeader className="flex-1">
                       <div className="flex items-start justify-between mb-2">
                         <div className="flex flex-wrap gap-1">
                           {post.categories?.map((category) => (
@@ -94,7 +94,7 @@ export function PostsSection({
                         {post.excerpt}
                       </CardDescription>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="mt-auto">
                       <div className="flex items-center justify-between text-sm text-muted-foreground">
                         <div className="flex items-center">
                           <User className="w-4 h-4 mr-1" />
