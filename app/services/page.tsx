@@ -69,7 +69,7 @@ export default async function ServicesPage() {
               {services.map((service) => (
                 <Card
                   key={service._id}
-                  className={`relative overflow-hidden hover:shadow-lg transition-shadow ${service.popular ? "ring-2 ring-primary" : ""}`}>
+                  className={`relative overflow-hidden hover:shadow-lg transition-shadow h-full flex flex-col ${service.popular ? "ring-2 ring-primary" : ""}`}>
                   {service.popular && (
                     <div className="absolute top-4 right-4">
                       <Badge className="bg-primary text-primary-foreground">
@@ -92,7 +92,7 @@ export default async function ServicesPage() {
                     />
                   </div>
 
-                  <CardHeader>
+                  <CardHeader className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
                       <div className="text-primary">
                         <ServiceIcon icon={service.icon} />
@@ -102,9 +102,6 @@ export default async function ServicesPage() {
                     <CardDescription className="text-sm">
                       {service.description}
                     </CardDescription>
-                  </CardHeader>
-
-                  <CardContent className="space-y-4">
                     <div className="space-y-2">
                       <h4 className="font-semibold text-sm">Что входит:</h4>
                       <ul className="space-y-1">
@@ -118,28 +115,26 @@ export default async function ServicesPage() {
                         ))}
                       </ul>
                     </div>
+                  </CardHeader>
 
-                    <div className="flex flex-col">
-                      <div className="flex justify-between items-center text-sm">
-                        <div>
-                          <span className="text-muted-foreground">Срок: </span>
-                          <span className="font-medium">
-                            {service.duration}
-                          </span>
-                        </div>
-                        <div className="text-right">
-                          <div className="font-bold text-lg text-primary">
-                            {service.price}
-                          </div>
+                  <CardContent className="space-y-4">
+                    <div className="flex justify-between items-center text-sm">
+                      <div>
+                        <span className="text-muted-foreground">Срок: </span>
+                        <span className="font-medium">{service.duration}</span>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-lg text-primary">
+                          {service.price}
                         </div>
                       </div>
+                    </div>
 
-                      <div className="flex gap-2">
-                        <Button className="flex-1">Заказать</Button>
-                        <Button variant="outline" size="sm">
-                          Подробнее
-                        </Button>
-                      </div>
+                    <div className="flex gap-2 mt-auto">
+                      <Button className="flex-1">Заказать</Button>
+                      <Button variant="outline" size="sm">
+                        Подробнее
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
