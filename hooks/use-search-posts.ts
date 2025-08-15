@@ -36,11 +36,17 @@ export function useSearchPosts({ initialPosts }: UseSearchPostsProps) {
 
         const searchResults = await response.json();
         setPosts(searchResults);
+
+        // Добавляем минимальную задержку для плавного перехода
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 300);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Search failed");
         setPosts(initialPosts); // Fallback to initial posts
-      } finally {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 300);
       }
     },
     [initialPosts]

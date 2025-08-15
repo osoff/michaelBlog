@@ -66,14 +66,7 @@ export default async function HomePage() {
 
       {/* Posts Filter and Posts Section */}
       <PostsProvider initialPosts={posts}>
-        <section className="py-8 border-b">
-          <div className="container mx-auto px-4">
-            <PostsFilter posts={posts} categories={categories} />
-          </div>
-        </section>
-
-        {/* Blog Posts */}
-        <PostsSection posts={posts} />
+        <PostsFilter posts={posts} categories={categories} />
       </PostsProvider>
     </div>
   );
